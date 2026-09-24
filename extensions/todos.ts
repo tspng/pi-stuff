@@ -109,7 +109,11 @@ const TodoParams = Type.Object({
 		Type.String({ description: "Todo id (TODO-<hex> or raw hex filename)" }),
 	),
 	title: Type.Optional(Type.String({ description: "Short summary shown in lists" })),
-	status: Type.Optional(Type.String({ description: "Todo status" })),
+	status: Type.Optional(
+		StringEnum(["open", "in-progress", "closed", "done"] as const, {
+			description: "Todo status (closed and done are terminal)",
+		}),
+	),
 	tags: Type.Optional(Type.Array(Type.String({ description: "Todo tag" }))),
 	body: Type.Optional(
 		Type.String({ description: "Long-form details (markdown). Update replaces; append adds." }),
@@ -1446,6 +1450,7 @@ export default function todosExtension(pi: ExtensionAPI) {
 			`Manage file-based todos in ${todosDirLabel} (list, list-all, get, create, update, append, delete, claim, release). ` +
 			"Title is the short summary; body is long-form markdown notes (update replaces, append adds). " +
 			"Todo ids are shown as TODO-<hex>; id parameters accept TODO-<hex> or the raw hex filename. " +
+			"Status is one of: open, in-progress, closed, done (closed and done are terminal). " +
 			"Claim tasks before working on them to avoid conflicts, and close them when complete.", 
 		parameters: TodoParams,
 
