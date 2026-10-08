@@ -76,8 +76,8 @@ Example output:
   ]
 }`;
 
-const CODEX_MODEL_ID = "gpt-5.4-mini";
-const FALLBACK_MODEL_ID = "glm-5.1";
+const CODEX_MODEL_ID = "gpt-6-luna";
+const FALLBACK_MODEL_ID = "glm-5.3-flash";
 
 /**
  * Prefer GPT-5.4-mini for extraction when available, otherwise fallback to GLM-5.1 or the current model.
