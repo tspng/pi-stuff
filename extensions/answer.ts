@@ -76,11 +76,11 @@ Example output:
   ]
 }`;
 
-const CODEX_MODEL_ID = "gpt-5.4-mini";
-const FALLBACK_MODEL_ID = "glm-5.1";
+const CODEX_MODEL_ID = "gpt-6-luna";
+const FALLBACK_MODEL_ID = "glm-5.3-flash";
 
 /**
- * Prefer GPT-5.4-mini for extraction when available, otherwise fallback to GLM-5.1 or the current model.
+ * Prefer the Codex extraction model, then the ZAI fallback, then the current model.
  */
 async function selectExtractionModel(
   currentModel: Model<Api>,
@@ -463,7 +463,6 @@ export default function (pi: ExtensionAPI) {
       return;
     }
 
-    // Select the best model for extraction (prefer GPT-5.4-mini, then glm-5.1)
     const extractionModel = await selectExtractionModel(ctx.model, ctx.modelRegistry);
 
     // Run extraction with loader UI
